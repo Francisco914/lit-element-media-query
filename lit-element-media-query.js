@@ -5,10 +5,6 @@ class litElementMediaQuery extends LitElement{
         return {
             breakPoints: {
                 type: Array,
-            },
-            
-            size: {
-                type: String,
             }
         }
     }
@@ -16,7 +12,6 @@ class litElementMediaQuery extends LitElement{
     constructor(){
         super();
         this.breakPoints = [];
-        this.size = '';
     }
 
     render() {
@@ -30,12 +25,22 @@ class litElementMediaQuery extends LitElement{
     }
 
     firstUpdated() {
-        this._getBreakPoint();
+        let result = this._getBreakPoint();
+        this.dispatchEvent(new CustomEvent('change-size',{
+            detail: result,
+            composed: true,
+            bubbles: true
+        }));
     }
 
     updated() {
         window.addEventListener('resize', () => {
-            this._getBreakPoint();
+            let result = this._getBreakPoint();
+            this.dispatchEvent(new CustomEvent('change-size',{
+                detail: result,
+                composed: true,
+                bubbles: true
+            }));
         })
     }
 
@@ -46,7 +51,7 @@ class litElementMediaQuery extends LitElement{
                 result = element.name;
             }
         });
-        this.size = result;
+        return result;
     }
 
 }
