@@ -1,6 +1,6 @@
 {
   "name": "lit-element-media-query",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lets you manage all the media queries you need",
   "main": "lit-element-media-query.js",
   "scripts": {
